@@ -16,12 +16,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
 
 /**
- * power_loss_recovery.cpp - Resume an SD print after power-loss
+ * feature/powerloss.cpp - Resume an SD print after power-loss
  */
 
 #include "../inc/MarlinConfigPre.h"
@@ -365,7 +365,7 @@ void PrintJobRecovery::resume() {
   #endif
 
   // Pretend that all axes are homed
-  axis_homed = axis_known_position = xyz_bits;
+  set_all_homed();
 
   // Recover volumetric extrusion state
   #if DISABLED(NO_VOLUMETRICS)
