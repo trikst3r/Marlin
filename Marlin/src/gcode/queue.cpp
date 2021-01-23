@@ -31,6 +31,7 @@ GCodeQueue queue;
 
 #include "../lcd/marlinui.h"
 #include "../sd/cardreader.h"
+#include "../module/motion.h"
 #include "../module/planner.h"
 #include "../module/temperature.h"
 #include "../MarlinCore.h"
@@ -54,6 +55,9 @@ GCodeQueue queue;
 #if ENABLED(GCODE_REPEAT_MARKERS)
   #include "../feature/repeat.h"
 #endif
+
+// Frequently used G-code strings
+PGMSTR(G28_STR, "G28");
 
 /**
  * GCode line number handling. Hosts may opt to include line numbers when
@@ -157,8 +161,6 @@ bool GCodeQueue::_enqueue(const char* cmd, bool say_ok/*=false*/
   );
   return true;
 }
-
-#define ISEOL(C) ((C) == '\n' || (C) == '\r')
 
 /**
  * Enqueue with Serial Echo
